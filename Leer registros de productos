@@ -1,0 +1,25 @@
+<?php
+// Conexión a la base de datos (suponiendo que ya está configurada)
+$conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Preparar la consulta SQL para leer todos los grupos de productos
+$sql = "SELECT id, nombre, descripcion FROM grupo_producto";
+$result = $conn->query($sql);
+
+// Mostrar los resultados si hay registros
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "ID: " . $row["id"]. " - Nombre: " . $row["nombre"]. " - Descripción: " . $row["descripcion"]. "<br>";
+    }
+} else {
+    echo "No se encontraron grupos de productos.";
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
