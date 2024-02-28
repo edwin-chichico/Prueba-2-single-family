@@ -1,0 +1,25 @@
+<?php
+// Conexión a la base de datos (suponiendo que ya está configurada)
+$conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener el ID del grupo de producto a eliminar desde la petición o formulario
+$id = $_POST['id'];
+
+// Preparar la consulta SQL para eliminar un grupo de producto
+$sql = "DELETE FROM grupo_producto WHERE id=$id";
+
+// Ejecutar la consulta y verificar si fue exitosa
+if ($conn->query($sql) === TRUE) {
+    echo "Grupo de producto eliminado correctamente.";
+} else {
+    echo "Error al eliminar el grupo de producto: " . $conn->error;
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
