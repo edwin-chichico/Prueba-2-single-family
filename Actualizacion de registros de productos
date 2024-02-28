@@ -1,0 +1,27 @@
+<?php
+// Conexión a la base de datos (suponiendo que ya está configurada)
+$conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener datos del formulario o petición (id, nuevo nombre y nueva descripción)
+$id = $_POST['id'];
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+
+// Preparar la consulta SQL para actualizar un grupo de producto
+$sql = "UPDATE grupo_producto SET nombre='$nombre', descripcion='$descripcion' WHERE id=$id";
+
+// Ejecutar la consulta y verificar si fue exitosa
+if ($conn->query($sql) === TRUE) {
+    echo "Grupo de producto actualizado correctamente.";
+} else {
+    echo "Error al actualizar el grupo de producto: " . $conn->error;
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
