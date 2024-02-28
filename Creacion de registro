@@ -1,0 +1,27 @@
+//Creacion de registro 
+<?php
+// Conexión a la base de datos (suponiendo que ya está configurada)
+$conn = new mysqli("localhost", "usuario", "contraseña", "basedatos");
+
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Obtener datos del formulario o petición (nombre y descripción)
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+
+// Preparar la consulta SQL para insertar un nuevo grupo de producto
+$sql = "INSERT INTO grupo_producto (nombre, descripcion) VALUES ('$nombre', '$descripcion')";
+
+// Ejecutar la consulta y verificar si fue exitosa
+if ($conn->query($sql) === TRUE) {
+    echo "Nuevo grupo de producto creado correctamente.";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
